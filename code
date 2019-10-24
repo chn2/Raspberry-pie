@@ -3,21 +3,22 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 
-IR_PIN = 17
-GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
+IR_PIN = 6
+GPIO.setup(18, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(IR_PIN, GPIO.IN)
 
 count = 1
 
 while True:
-  got_something = GPIO.input(IR_PIN)
-  if got_something:
-    indicator.on()
-    print("{:>3} Got something".format(count))
-    GPIO.output(8, GPIO.HIGH)
-  else:
-    indicator.off()
+  nothing = GPIO.input(IR_PIN)
+  if nothing:
     print("{:>3} Nothing detected".format(count))
-    GPIO.output(8, GPIO.LOW)
+    GPIO.output(18, GPIO.HIGH)
+    
+  else:
+    print("{:>3} Got something".format(count))
+    GPIO.output(18, GPIO.LOW)
+    
   count += 1
-  time.sleep(10)
+  time.sleep(1)
+
